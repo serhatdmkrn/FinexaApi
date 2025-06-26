@@ -1,8 +1,8 @@
 ﻿FROM mcr.microsoft.com/dotnet/sdk:9.0 AS build
 WORKDIR /app
 
-COPY *.sln ./
-COPY FinexaApi/*.csproj ./FinexaApi/
+COPY FinexaApi.sln ./
+COPY FinexaApi.csproj ./
 RUN dotnet restore
 
 COPY . ./
