@@ -76,7 +76,7 @@ namespace FinexaApi.Controllers
 
             await _context.SaveChangesAsync();
 
-            var resetLink = $"http://localhost:5173/#/reset-password/{resetToken}";
+            var resetLink = $"https://serhatdmkrn.github.io/finexa-app/#/reset-password/{resetToken}";
 
             var success = await _emailService.SendPasswordResetEmailAsync(model.Email, resetLink);
             if (!success)

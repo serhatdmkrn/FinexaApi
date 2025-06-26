@@ -9,7 +9,7 @@ public class CryptoCacheService : BackgroundService
     private readonly ILogger<CryptoCacheService> _logger;
 
     private const string CacheKey = "Top1000Cryptos";
-    private const int CacheDurationSeconds = 61;
+    private const int CacheDurationSeconds = 90;
 
     public CryptoCacheService(IMemoryCache memoryCache, IHttpClientFactory httpClientFactory, ILogger<CryptoCacheService> logger)
     {
