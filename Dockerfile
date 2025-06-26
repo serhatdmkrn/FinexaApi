@@ -6,8 +6,7 @@ COPY FinexaApi.csproj ./
 RUN dotnet restore
 
 COPY . ./
-WORKDIR /app/FinexaApi
-RUN dotnet publish -c Release -o /out
+RUN dotnet publish FinexaApi.csproj -c Release -o /out
 
 FROM mcr.microsoft.com/dotnet/aspnet:9.0 AS runtime
 WORKDIR /app
