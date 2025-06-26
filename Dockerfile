@@ -15,5 +15,5 @@ ENV DOTNET_ENVIRONMENT=Production
 
 COPY --from=build /out ./
 
-EXPOSE 8000
+EXPOSE 8080
 ENTRYPOINT ["dotnet", "FinexaApi.dll"]
