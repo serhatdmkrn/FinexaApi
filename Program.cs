@@ -18,12 +18,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddMemoryCache();
 
-builder.Services.AddHttpClient<IFinanceService, FinanceService>();
-builder.Services.AddScoped<ICryptoService, CryptoService>();
-builder.Services.AddScoped<IAuthService, AuthService>();
-
-builder.Services.AddHostedService<CryptoCacheService>();
-
 var key = Encoding.ASCII.GetBytes(Environment.GetEnvironmentVariable("JWT_KEY"));
 
 builder.Services.AddAuthentication(options =>
@@ -39,11 +33,9 @@ builder.Services.AddAuthentication(options =>
         ValidateAudience = true,
         ValidateLifetime = true,
         ValidateIssuerSigningKey = true,
-
         ValidIssuer = Environment.GetEnvironmentVariable("JWT_ISSUER"),
         ValidAudience = Environment.GetEnvironmentVariable("JWT_AUDIENCE"),
         IssuerSigningKey = new SymmetricSecurityKey(key),
-
         ClockSkew = TimeSpan.Zero
     };
 
@@ -60,14 +52,24 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy
-            .AllowAnyOrigin()
-            .AllowAnyHeader()
-            .AllowAnyMethod()
-    );
+        policy.AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod());
 });
 
 builder.Services.AddScoped<IEmailService, EmailService>();
+
+builder.Services.AddHttpClient();
+
+builder.Services.AddHttpClient<IFinanceService, FinanceService>();
+builder.Services.AddScoped<ICryptoService, CryptoService>();
+builder.Services.AddScoped<IAuthService, AuthService>();
+builder.Services.AddScoped<IStockService, StockService>();
+
+
+builder.Services.AddHostedService<CryptoCacheService>();
+builder.Services.AddHostedService<StockCacheService>();
+
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -89,7 +91,7 @@ builder.Services.AddSwaggerGen(c =>
         {
             new OpenApiSecurityScheme
             {
-                Reference= new OpenApiReference
+                Reference = new OpenApiReference
                 {
                     Type = ReferenceType.SecurityScheme,
                     Id = "Bearer"
