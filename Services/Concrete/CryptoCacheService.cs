@@ -56,7 +56,7 @@ public class CryptoCacheService : BackgroundService
                     }
                 }
 
-                _memoryCache.Set(CacheKey, allCoins, TimeSpan.FromSeconds(CacheDurationSeconds));
+                _memoryCache.Set(CacheKey, allCoins, TimeSpan.FromSeconds(100));
 
                 _logger.LogInformation($"Cache updated with {allCoins.Count} cryptocurrencies.");
 
