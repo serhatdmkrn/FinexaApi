@@ -73,12 +73,12 @@ public class StockCacheService : BackgroundService
 
                 _currentIndex++;
 
-                await Task.Delay(1000, stoppingToken); // 1 saniye bekle, rate limit için önemli
+                await Task.Delay(1000, stoppingToken);
             }
             catch (Exception ex)
             {
                 _logger.LogError(ex, "StockCacheService error");
-                await Task.Delay(5000, stoppingToken); // hata durumunda 5 saniye bekle
+                await Task.Delay(5000, stoppingToken);
             }
         }
 

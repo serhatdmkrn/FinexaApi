@@ -5,6 +5,7 @@ using FinexaApi.Data;
 using FinexaApi.Models;
 using FinexaApi.Models.RequestModel;
 using System.Security.Claims;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace FinexaApi.Controllers
 {
@@ -65,13 +66,16 @@ namespace FinexaApi.Controllers
         {
             var userId = GetCurrentUserId();
 
+            var turkeyTimeZone = TimeZoneInfo.FindSystemTimeZoneById("Turkey Standard Time");
+            DateTime nowInTurkey = TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, turkeyTimeZone);
+
             var walletItem = new WalletItem
             {
                 UserId = userId,
                 Type = model.Type,
                 Quantity = model.Quantity,
                 PurchasePrice = model.PurchasePrice,
-                Date = model.Date ?? DateTime.Now
+                Date = model.Date ?? nowInTurkey
             };
 
             _context.WalletItems.Add(walletItem);
