@@ -7,6 +7,7 @@ namespace FinexaApi.Controllers
     public class HealthController : ControllerBase
     {
         [HttpGet]
+        [HttpHead]
         public IActionResult Get()
         {
             return Ok("Finexa API is alive");
