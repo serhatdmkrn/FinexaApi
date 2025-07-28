@@ -52,24 +52,21 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.AllowAnyOrigin()
+        policy.WithOrigins("https://serhatdmkrn.github.io")
               .AllowAnyHeader()
-              .AllowAnyMethod());
+              .AllowAnyMethod()
+    );
 });
 
-builder.Services.AddScoped<IEmailService, EmailService>();
-
 builder.Services.AddHttpClient();
-
 builder.Services.AddHttpClient<IFinanceService, FinanceService>();
 builder.Services.AddScoped<ICryptoService, CryptoService>();
 builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IStockService, StockService>();
-
+builder.Services.AddScoped<IEmailService, EmailService>();
 
 builder.Services.AddHostedService<CryptoCacheService>();
 builder.Services.AddHostedService<StockCacheService>();
-
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
