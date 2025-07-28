@@ -12,7 +12,7 @@ namespace FinexaApi.Models.RequestModel
 
         [Required(ErrorMessage = "Email zorunludur.")]
         [RegularExpression(@"^[a-zA-Z0-9._%+-]+@[a-zA-Z]+\.(com|net|org|edu|gov|mil|co|io|info|biz|me|us|tr)$",
-    ErrorMessage = "Geçerli bir e-posta adresi giriniz (örn. example@gmail.com)")]
+        ErrorMessage = "Geçerli bir e-posta adresi giriniz (örn. example@gmail.com)")]
         public string Email { get; set; }
 
         [Required(ErrorMessage = "Şifre zorunludur.")]
