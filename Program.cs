@@ -52,9 +52,12 @@ builder.Services.AddAuthentication(options =>
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
-        policy.WithOrigins("https://serhatdmkrn.github.io")
-              .AllowAnyHeader()
-              .AllowAnyMethod()
+        policy.WithOrigins(
+            "http://localhost:5173",              // Vite (local geliştirme)
+            "https://serhatdmkrn.github.io"       // GitHub Pages (deploy ortamı)
+        )
+        .AllowAnyHeader()
+        .AllowAnyMethod()
     );
 });
 
